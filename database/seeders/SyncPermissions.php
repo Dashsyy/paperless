@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Enums\PermissionEnum;
@@ -8,13 +9,8 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
-
 class SyncPermissions extends Seeder
 {
-    /**
-     *
-     * @return void
-     */
     public function run(): void
     {
         app(PermissionRegistrar::class)->forgetCachedPermissions();
@@ -26,9 +22,8 @@ class SyncPermissions extends Seeder
         // foreach ($permissions as $permission) {
         //     Permission::create($permission);
         // }
-        
-        Role::findOrCreate(RoleEnum::SuperAdmin->value);
 
+        Role::findOrCreate(RoleEnum::SuperAdmin->value);
 
         // // Assign all permissions to admin role
         // $adminRole = Role::where('name', 'Admin')->first();

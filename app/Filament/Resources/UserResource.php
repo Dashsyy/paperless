@@ -2,20 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\PermissionEnum;
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Arr;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
@@ -56,7 +51,7 @@ class UserResource extends Resource
                         'sometimes',
                         'min:8',
                     ])
-                    ->dehydrated(fn($state) => filled($state))
+                    ->dehydrated(fn ($state) => filled($state)),
             ]);
     }
 
@@ -100,7 +95,7 @@ class UserResource extends Resource
                     ->action(function (array $data, User $user) {
                         $user->update(Arr::except($data, 'roles'));
                         $user->syncRoles($data['roles']);
-                    })
+                    }),
             ]);
     }
 
