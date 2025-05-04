@@ -26,8 +26,8 @@ class SyncPermissions extends Seeder
         Role::findOrCreate(RoleEnum::SuperAdmin->value);
 
         // // Assign all permissions to admin role
-        // $adminRole = Role::where('name', 'Admin')->first();
-        // $adminRole->givePermissionTo(Permission::all());
+        $adminRole = Role::where('name', 'SuperAdmin')->first();
+        $adminRole->givePermissionTo(Permission::all());
 
     }
 }
