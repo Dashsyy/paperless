@@ -12,9 +12,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-    }
+    public function register(): void {}
 
     public function boot(): void
     {
@@ -25,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected function registerAuthorization(): void
     {
-        Gate::define('viewHealth', fn($user = null) => $this->app->isLocal());
+        Gate::define('viewHealth', fn ($user = null) => $this->app->isLocal());
 
         Gate::before(function (User $user) {
             return $user->hasRole(RoleEnum::SuperAdmin) ? true : null;
@@ -34,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected function configureUrlScheme(): void
     {
-        if (!$this->app->isLocal()) {
+        if (! $this->app->isLocal()) {
             URL::forceScheme('https');
         }
     }
@@ -44,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         DB::prohibitDestructiveCommands($this->app->isProduction());
 
         Model::unguard();
-        Model::shouldBeStrict(!$this->app->isProduction());
-        Model::preventLazyLoading(!$this->app->isProduction());
+        Model::shouldBeStrict(! $this->app->isProduction());
+        Model::preventLazyLoading(! $this->app->isProduction());
     }
 }
