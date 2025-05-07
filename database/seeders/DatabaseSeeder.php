@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Jobseeker;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +16,7 @@ class DatabaseSeeder extends Seeder
             SyncPermissions::class,
             UserSeeder::class,
             SeekerSeeder::class,
-            JobSeekerSeeder::class
+            JobSeekerSeeder::class,
             ]
         );
     }

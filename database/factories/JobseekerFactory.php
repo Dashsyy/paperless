@@ -14,7 +14,7 @@ class JobseekerFactory extends Factory
         return [
             'seeker_id' => fake()->numberBetween(1, 20),
             'role' => fake()->jobTitle(),
-            'description' => fake()->paragraph(3)
+            'description' => fake()->paragraph(3),
         ];
     }
 }

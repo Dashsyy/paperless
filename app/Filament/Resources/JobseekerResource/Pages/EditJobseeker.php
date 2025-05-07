@@ -20,7 +20,7 @@ class EditJobseeker extends EditRecord
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $data['seeker_name'] = $this->record->seeker->name ?? null;
-        
+
         return $data;
     }
 }

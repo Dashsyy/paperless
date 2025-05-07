@@ -20,7 +20,7 @@ class SeekerFactory extends Factory
             'name' => fake()->name,
             'phone' => fake()->phoneNumber,
             'email' => fake()->email,
-            'address' => fake()->address
+            'address' => fake()->address,
         ];
     }
 }

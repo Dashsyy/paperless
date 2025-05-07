@@ -18,7 +18,7 @@ class SyncaRoleFromJobSeeker extends Command
 
         foreach ($roles as $role) {
             SeekerRole::query()->create([
-                'name' => $role
+                'name' => $role,
             ]);
         }
 

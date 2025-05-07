@@ -28,7 +28,7 @@ class SyncPermissions extends Seeder
                 PermissionEnum::viewAnyUser->value,
                 PermissionEnum::viewUser->value,
                 PermissionEnum::createUser->value,
-                PermissionEnum::updateUser->value
+                PermissionEnum::updateUser->value,
             ]
         );
     }
