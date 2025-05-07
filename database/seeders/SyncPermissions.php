@@ -23,6 +23,13 @@ class SyncPermissions extends Seeder
             Role::findOrCreate($role->value);
         }
 
-        // Assign all permissions to admin role
+        Role::findOrCreate(RoleEnum::Admin->value)->syncPermissions(
+            [
+                PermissionEnum::viewAnyUser->value,
+                PermissionEnum::viewUser->value,
+                PermissionEnum::createUser->value,
+                PermissionEnum::updateUser->value
+            ]
+        );
     }
 }

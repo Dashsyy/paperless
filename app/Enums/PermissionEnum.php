@@ -8,6 +8,4 @@ enum PermissionEnum: string
     case viewUser = 'user.view';
     case createUser = 'user.create';
     case updateUser = 'user.update';
-
-    case viewAnyPost = 'post:any.view';
 }

@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
         User::factory()->count(10)->create();
 
         $superAdmin = User::query()->createOrFirst([
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => 'superadmin',
+            'email' => 'superadmin@paperless.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
