@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: fttx-monolith-redis
+  labels:
+    app: fttx-monolith-redis
+spec:
+  replicas: 1
+  serviceName: fttx-monolith-redis
+  selector:
+    matchLabels:
+      app: fttx-monolith-redis
+  template:
+    metadata:
+      labels:
+        app: fttx-monolith-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          command:
+            - redis-server
+            - "/etc/redis/redis.conf"
+          volumeMounts:
+            - name: fttx-monolith-redis-data
+              mountPath: /data
+            - name: fttx-monolith-redis-configmap
+              mountPath: /etc/redis
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+      volumes:
+        - name: fttx-monolith-redis-configmap
+          configMap:
+            name: fttx-monolith-redis
+  volumeClaimTemplates:
+    - metadata:
+        name: fttx-monolith-redis-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: freenas-nfs-csi
+        resources:
+          requests:
+            storage: 256Mi

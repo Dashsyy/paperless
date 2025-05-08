@@ -1,0 +1,12 @@
+resources:
+  - configmap.yaml
+  - pvc.yaml
+  - deployment-web.yaml
+  - deployment-queue.yaml
+  - deployment-scheduler.yaml
+  - deployment-offering-subscription-consumer.yaml
+  - deployment-offering-status-change-consumer.yaml
+  - deployment-pre-renewal-alert-consumer.yaml
+  - deployment-deactivation-consumer.yaml
+  - service.yaml
+  - ingress.yaml

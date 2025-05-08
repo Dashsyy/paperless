@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fttx-monolith-config
+data:
+  PHP_OPCACHE_ENABLE: "1"
+  AUTORUN_ENABLED: "true"
+  AUTORUN_LARAVEL_MIGRATION: "false"

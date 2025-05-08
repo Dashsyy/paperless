@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fttx-monolith-queue
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: fttx-monolith-queue
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          command: ["php", "/var/www/html/artisan", "horizon"]

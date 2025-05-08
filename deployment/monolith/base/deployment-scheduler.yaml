@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fttx-monolith-scheduler
+  labels:
+    app: fttx-monolith-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fttx-monolith-scheduler
+  template:
+    metadata:
+      labels:
+        app: fttx-monolith-scheduler
+    spec:
+      containers:
+        - name: fttx-monolith-scheduler
+          image: registry.gitlab.com/smartaxiatakh/devops/fttx/monolith
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "400m"
+          envFrom:
+            - secretRef:
+                name: fttx-monolith-env
+            - configMapRef:
+                name: fttx-monolith-config
+          volumeMounts:
+            - name: fttx-monolith-app-storage
+              mountPath: /var/www/html/storage/app
+          command: ["php", "/var/www/html/artisan", "schedule:work"]
+      volumes:
+        - name: fttx-monolith-app-storage
+          persistentVolumeClaim:
+            claimName: fttx-monolith-app-storage
+      imagePullSecrets:
+        - name: gitlab-registry-credentials

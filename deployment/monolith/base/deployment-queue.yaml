@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fttx-monolith-queue
+  labels:
+    app: fttx-monolith-queue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fttx-monolith-queue
+  template:
+    metadata:
+      labels:
+        app: fttx-monolith-queue
+    spec:
+      containers:
+        - name: fttx-monolith-queue
+          image: registry.gitlab.com/smartaxiatakh/devops/fttx/monolith
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
+            limits:
+              memory: "256Mi"
+              cpu: "400m"
+          envFrom:
+            - secretRef:
+                name: fttx-monolith-env
+            - configMapRef:
+                name: fttx-monolith-config
+          volumeMounts:
+            - name: fttx-monolith-app-storage
+              mountPath: /var/www/html/storage/app
+          command: ["php", "/var/www/html/artisan", "queue:work", "--tries=3"]
+      volumes:
+        - name: fttx-monolith-app-storage
+          persistentVolumeClaim:
+            claimName: fttx-monolith-app-storage
+      imagePullSecrets:
+        - name: gitlab-registry-credentials

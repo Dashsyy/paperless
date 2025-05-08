@@ -1,0 +1,29 @@
+namespace: devops-fttx-ns
+
+resources:
+  - ../../base
+  - redis/configmap.yaml
+  - redis/statefulset.yaml
+  - redis/service.yaml
+
+patches:
+  - path: deployment-web.yaml
+  - path: deployment-queue.yaml
+  - path: deployment-scheduler.yaml
+  - path: deployment-offering-subscription-consumer.yaml
+  - path: deployment-offering-status-change-consumer.yaml
+  - path: deployment-pre-renewal-alert-consumer.yaml
+  - path: deployment-deactivation-consumer.yaml
+  - path: ingress.yaml
+  - target:
+      version: v1
+      kind: PersistentVolumeClaim
+      name: fttx-monolith-app-storage
+    patch: |-
+      - op: replace
+        path: /spec/resources/requests/storage
+        value: 1Gi
+
+images:
+  - name: registry.gitlab.com/smartaxiatakh/devops/fttx/monolith
+    newTag: 6ae881aaaf5f348d7886195b32ef25d0f43858dc

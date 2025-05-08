@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fttx-monolith-queue
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - tkk-vm-st-it-k8s-w-1
+                      - tkk-vm-st-it-k8s-w-2
+                      - tkk-vm-st-it-k8s-w-3
+      containers:
+        - name: fttx-monolith-queue
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          command: [ "php", "/var/www/html/artisan", "horizon" ]
+

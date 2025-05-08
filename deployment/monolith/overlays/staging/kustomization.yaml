@@ -1,0 +1,16 @@
+namespace: devops-fttx-ns
+
+resources:
+  - ../../base
+  - deployment-onu-online.yaml
+  - redis/configmap.yaml
+  - redis/statefulset.yaml
+  - redis/service.yaml
+
+patches:
+  - path: deployment-web.yaml
+  - path: deployment-queue.yaml
+
+images:
+  - name: registry.gitlab.com/smartaxiatakh/devops/fttx/monolith
+    newTag: 996ab4dd23d766705eea3c48750d0ed7b9e67fa0

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fttx-monolith-app-storage
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: freenas-nfs-csi
+  resources:
+    requests:
+      storage: 256Mi
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fttx-monolith-app-logs-storage
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: freenas-nfs-csi
+  resources:
+    requests:
+      storage: 10000Mi

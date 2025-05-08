@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fttx-monolith-offering-status-change-consumer
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: fttx-monolith-offering-status-change-consumer
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "300m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

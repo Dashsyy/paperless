@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fttx-monolith
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: st-home-internet.smart.com.kh
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: fttx-monolith
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - st-home-internet.smart.com.kh
+      secretName: smart-certificate-tls

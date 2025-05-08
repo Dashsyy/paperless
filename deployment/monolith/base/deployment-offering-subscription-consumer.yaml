@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fttx-monolith-offering-subscription-consumer
+  labels:
+    app: fttx-monolith-offering-subscription-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fttx-monolith-offering-subscription-consumer
+  template:
+    metadata:
+      labels:
+        app: fttx-monolith-offering-subscription-consumer
+    spec:
+      containers:
+        - name: fttx-monolith-offering-subscription-consumer
+          image: registry.gitlab.com/smartaxiatakh/devops/fttx/monolith
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          envFrom:
+            - secretRef:
+                name: fttx-monolith-env
+            - configMapRef:
+                name: fttx-monolith-config
+          volumeMounts:
+            - name: fttx-monolith-app-storage
+              mountPath: /var/www/html/storage/app
+          command:
+            - php
+            - /var/www/html/artisan
+            - app:consume-bss-offering-subscription-events
+      volumes:
+        - name: fttx-monolith-app-storage
+          persistentVolumeClaim:
+            claimName: fttx-monolith-app-storage
+      imagePullSecrets:
+        - name: gitlab-registry-credentials

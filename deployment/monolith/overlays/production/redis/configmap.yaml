@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fttx-monolith-redis
+  labels:
+    app: fttx-monolith-redis
+data:
+  redis.conf: |
+    maxmemory 128mb
+    maxmemory-policy allkeys-lru
+    maxclients 20000
+    timeout 300
+    appendonly no
+    dbfilename dump.rdb
+    dir /data
