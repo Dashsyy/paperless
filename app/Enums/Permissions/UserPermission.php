@@ -5,8 +5,8 @@ namespace App\Enums\Permissions;
 enum UserPermission: string
 {
     case viewAnyUser = 'user:any.view';
-    case VIEW = 'user.view';
-    case CREATE = 'user.create';
-    case UPDATE = 'user.update';
-    case DELETE = 'user.delete';
+    case viewUser = 'user.view';
+    case createUser = 'user.create';
+    case updateUser = 'user.update';
+    case deleteUser = 'user.delete';
 }
