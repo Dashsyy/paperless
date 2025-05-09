@@ -13,22 +13,21 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!app()->isProduction()) {
+        if (! app()->isProduction()) {
             Role::truncate();
             User::truncate();
             User::factory()->count(10)->create();
         }
 
-
         // RoleEnum
         foreach (RoleEnum::cases() as $role) {
             Role::findOrCreate($role->value);
-        };
+        }
 
         foreach (RoleEnum::cases() as $role) {
             User::factory()->create([
                 'name' => $role->value,
-                'email' => $role->value . '@paperless.com',
+                'email' => $role->value.'@paperless.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),

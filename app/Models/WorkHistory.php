@@ -9,6 +9,4 @@ class WorkHistory extends Model
 {
     /** @use HasFactory<\Database\Factories\WorkHistoryFactory> */
     use HasFactory;
-
-
 }

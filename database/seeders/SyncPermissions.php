@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Enums\PermissionEnum;
 use App\Enums\Permissions\JobseekerPermission;
 use App\Enums\Permissions\SeekerPermission;
 use App\Enums\Permissions\UserPermission;
 use App\Enums\Permissions\WorkHistoryPermission;
 use App\Enums\RoleEnum;
-use App\Models\Seeker;
-use Illuminate\Contracts\Queue\Job;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -40,11 +37,9 @@ class SyncPermissions extends Seeder
          * End of loading permission and create
          */
 
-
-
-
         /**
          * Sync permissions to Admin role
+         *
          * @see RoleEnum\Admin
          */
         Role::findOrCreate(RoleEnum::Admin->value)->syncPermissions(
@@ -71,9 +66,9 @@ class SyncPermissions extends Seeder
 
         /**
          * Sync permissions to Editor role
+         *
          * @see RoleEnum\Editor
          */
-
         Role::findOrCreate(RoleEnum::Editor->value)->syncPermissions(
             [
                 JobseekerPermission::viewAnyJobseeker->value,

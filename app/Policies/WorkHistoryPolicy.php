@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Enums\Permissions\WorkHistoryPermission;
 use App\Models\User;
 use App\Models\WorkHistory;
-use Illuminate\Auth\Access\Response;
 
 class WorkHistoryPolicy
 {
