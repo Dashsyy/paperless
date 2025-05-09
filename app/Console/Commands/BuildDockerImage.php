@@ -6,12 +6,12 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
-
 class BuildDockerImage extends Command
 {
     protected $signature = 'docker:build {--tag=laravel-app:latest}';
 
     protected $description = 'Build the Docker image for the Laravel app';
+
     public function handle()
     {
         $appName = env('APP_NAME', 'laravel-app');
@@ -37,10 +37,12 @@ class BuildDockerImage extends Command
 
         if ($process->isSuccessful()) {
             $this->info("✅ Docker image built successfully: $fullTag");
+
             return 0;
         }
 
         $this->error('❌ Docker build failed.');
+
         return 1;
     }
 }
