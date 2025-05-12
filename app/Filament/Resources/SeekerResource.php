@@ -8,12 +8,10 @@ use App\Filament\Resources\WorkHistoryResource\RelationManagers\WorkHistoryRelat
 use App\Models\Seeker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\Pages\Concerns\HasRelationManagers;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Queue\Job;
 
 class SeekerResource extends Resource
 {
@@ -58,7 +56,7 @@ class SeekerResource extends Resource
     {
         return [
             JobSeekerRelationManager::class,
-            WorkHistoryRelationManager::class
+            WorkHistoryRelationManager::class,
         ];
     }
 

@@ -3,16 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WorkHistoryResource\Pages;
-use App\Filament\Resources\WorkHistoryResource\RelationManagers;
-use App\Filament\Resources\WorkHistoryResource\RelationManagers\WorkHistoryRelationManager;
 use App\Models\WorkHistory;
 use Filament\Forms;
-use Filament\Forms\Components\Builder;
 use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 
 class WorkHistoryResource extends Resource
@@ -61,28 +56,26 @@ class WorkHistoryResource extends Resource
                     ->label('Total Duration')
                     ->default('N/A')
                     ->formatStateUsing(function ($record) {
-                        if (!$record->start_date || !$record->end_date) {
+                        if (! $record->start_date || ! $record->end_date) {
                             return 'N/A';
                         }
 
                         $start = \Carbon\Carbon::parse($record->start_date);
                         $end = \Carbon\Carbon::parse($record->end_date);
-                        $totalMonth = intval( $start->diffInMonths($end));
+                        $totalMonth = intval($start->diffInMonths($end));
                         $year = intval($totalMonth / 12);
                         $month = $totalMonth % 12;
 
                         $display = 'N/A';
 
-                        if(empty($month)){
-                            $display = $year.' year'. ($year > 1 ? 's' : '');
-                        }
-                        else{
-                            $display = $year.' year'. ($year > 1 ? 's' : '') . ' ' . $month.' month'. ($month > 1 ? 's' : '');
+                        if (empty($month)) {
+                            $display = $year.' year'.($year > 1 ? 's' : '');
+                        } else {
+                            $display = $year.' year'.($year > 1 ? 's' : '').' '.$month.' month'.($month > 1 ? 's' : '');
                         }
 
                         return $display;
                     }),
-
 
             ])
             ->filters([

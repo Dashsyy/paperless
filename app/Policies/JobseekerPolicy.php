@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Enums\Permissions\JobseekerPermission;
 use App\Models\jobseeker;
 use App\Models\User;
-use Illuminate\Contracts\Queue\Job;
 
 class JobseekerPolicy
 {

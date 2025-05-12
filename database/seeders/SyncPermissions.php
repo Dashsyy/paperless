@@ -37,7 +37,6 @@ class SyncPermissions extends Seeder
             Permission::findOrCreate($permission->value);
         }
 
-
         /**
          * End of loading permission and create
          */

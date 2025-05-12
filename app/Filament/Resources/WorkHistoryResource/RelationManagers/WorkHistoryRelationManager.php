@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WorkHistoryRelationManager extends RelationManager
 {
@@ -38,17 +36,16 @@ class WorkHistoryRelationManager extends RelationManager
                     ->formatStateUsing(function ($record) {
                         $start = \Carbon\Carbon::parse($record->start_date);
                         $end = \Carbon\Carbon::parse($record->end_date);
-                        $totalMonth = intval( $start->diffInMonths($end));
+                        $totalMonth = intval($start->diffInMonths($end));
                         $year = intval($totalMonth / 12);
                         $month = $totalMonth % 12;
 
                         $display = 'N/A';
 
-                        if(empty($month)){
-                            $display = $year.' year'. ($year > 1 ? 's' : '');
-                        }
-                        else{
-                            $display = $year.' year'. ($year > 1 ? 's' : '') . ' ' . $month.' month'. ($month > 1 ? 's' : '');
+                        if (empty($month)) {
+                            $display = $year.' year'.($year > 1 ? 's' : '');
+                        } else {
+                            $display = $year.' year'.($year > 1 ? 's' : '').' '.$month.' month'.($month > 1 ? 's' : '');
                         }
 
                         return $display;
@@ -56,7 +53,7 @@ class WorkHistoryRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('company_name')->badge(),
                 Tables\Columns\TextColumn::make('position'),
                 Tables\Columns\TextColumn::make('description')
-                ->limit(255)
+                    ->limit(255),
             ])
             ->filters([
                 //
