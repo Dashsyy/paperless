@@ -42,7 +42,7 @@ class JobseekerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('seeker.name'),
+                TextColumn::make('seeker.name')->searchable()->copyable(),
                 TextColumn::make('role')->badge(),
                 TextColumn::make('description')->limit(100),
             ])

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Seeker;
+use App\Models\WorkHistory;
 use Illuminate\Database\Seeder;
 
 class WorkHistorySeeder extends Seeder
@@ -11,6 +13,10 @@ class WorkHistorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Seeker::query()->get()->pluck('id')->each(function ($seekerId) {
+            WorkHistory::factory()->count(3)->create([
+                'seeker_id' => $seekerId,
+            ]);
+        });
     }
 }

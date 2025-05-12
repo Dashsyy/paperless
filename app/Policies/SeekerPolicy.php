@@ -2,64 +2,29 @@
 
 namespace App\Policies;
 
+use App\Enums\Permissions\SeekerPermission;
 use App\Models\Seeker;
 use App\Models\User;
 
 class SeekerPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can(SeekerPermission::viewAnySeeker);
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, Seeker $seeker): bool
     {
-        return false;
+        return $user->can(SeekerPermission::viewSeeker);
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can(SeekerPermission::createSeeker);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, Seeker $seeker): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Seeker $seeker): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Seeker $seeker): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Seeker $seeker): bool
-    {
-        return false;
+        return $user->can(SeekerPermission::updateSeeker);
     }
 }

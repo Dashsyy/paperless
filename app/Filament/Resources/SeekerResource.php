@@ -2,14 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\JobSeekerResource\RelationManagers\JobSeekerRelationManager;
 use App\Filament\Resources\SeekerResource\Pages;
+use App\Filament\Resources\WorkHistoryResource\RelationManagers\WorkHistoryRelationManager;
 use App\Models\Seeker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Resources\Pages\Concerns\HasRelationManagers;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Queue\Job;
 
 class SeekerResource extends Resource
 {
@@ -36,9 +40,9 @@ class SeekerResource extends Resource
             ->columns([
                 TextColumn::make('index')->label('#')
                     ->getStateUsing(fn ($record, $rowLoop): string => $rowLoop->iteration),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('phone')->searchable(),
-                TextColumn::make('email')->searchable(),
+                TextColumn::make('name')->searchable()->copyable(),
+                TextColumn::make('phone')->searchable()->copyable(),
+                TextColumn::make('email')->searchable()->copyable(),
             ])
             ->filters([
                 //
@@ -53,7 +57,8 @@ class SeekerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            JobSeekerRelationManager::class,
+            WorkHistoryRelationManager::class
         ];
     }
 

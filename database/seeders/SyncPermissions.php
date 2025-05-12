@@ -33,6 +33,11 @@ class SyncPermissions extends Seeder
             Permission::findOrCreate($permission->value);
         }
 
+        foreach (SeekerPermission::cases() as $permission) {
+            Permission::findOrCreate($permission->value);
+        }
+
+
         /**
          * End of loading permission and create
          */

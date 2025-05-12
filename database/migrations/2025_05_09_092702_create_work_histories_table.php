@@ -13,12 +13,16 @@ return new class() extends Migration
     {
         Schema::create('work_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('seeker_id');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('company_name')->nullable();
-            $table->string('job_title')->nullable();
+            $table->string('position')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->index('company_name');
+            $table->index(['start_date', 'end_date']);
         });
     }
 

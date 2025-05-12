@@ -13,12 +13,6 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        if (! app()->isProduction()) {
-            Role::truncate();
-            User::truncate();
-            User::factory()->count(10)->create();
-        }
-
         // RoleEnum
         foreach (RoleEnum::cases() as $role) {
             Role::findOrCreate($role->value);

@@ -2,64 +2,30 @@
 
 namespace App\Policies;
 
+use App\Enums\Permissions\JobseekerPermission;
 use App\Models\jobseeker;
 use App\Models\User;
+use Illuminate\Contracts\Queue\Job;
 
 class JobseekerPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can(JobseekerPermission::viewAnyJobseeker);
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, jobseeker $jobseeker): bool
     {
-        return false;
+        return $user->can(JobseekerPermission::viewJobseeker->value);
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can(JobseekerPermission::createJobseeker);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, jobseeker $jobseeker): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, jobseeker $jobseeker): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, jobseeker $jobseeker): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, jobseeker $jobseeker): bool
-    {
-        return false;
+        return $user->can(JobseekerPermission::updateJobseeker);
     }
 }
