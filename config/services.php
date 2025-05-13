@@ -38,7 +38,6 @@ return [
     /**
      * Application local service configurations
      */
-
     'obfuscation_salt' => env('OBFUSCATION_SALT', 93421),
 
 ];
