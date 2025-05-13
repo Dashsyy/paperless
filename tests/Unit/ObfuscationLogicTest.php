@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class ObfuscationLogicTest extends TestCase
 {
-
     public function test_seeker_obfuscation_is_reversible()
     {
         config()->set('services.obfuscation_salt', 93421);
@@ -26,5 +25,4 @@ class ObfuscationLogicTest extends TestCase
         $resolved = Seeker::findByObfuscatedId('se_1');
         $this->assertNull($resolved);
     }
-
 }
