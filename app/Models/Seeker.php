@@ -31,7 +31,7 @@ class Seeker extends Model
         return $this->hasOne(WorkHistory::class, 'seeker_id', 'id');
     }
 
-    public function getObfuscationPrefix():string
+    public function getObfuscationPrefix(): string
     {
         return 'se';
     }

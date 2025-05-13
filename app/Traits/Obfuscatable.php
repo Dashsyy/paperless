@@ -6,27 +6,28 @@ trait Obfuscatable
 {
     public function getObfuscatedIdAttribute(): string
     {
-        return $this->getObfuscationPrefix() . $this->encodeId($this->getKey());
+        return $this->getObfuscationPrefix().$this->encodeId($this->getKey());
     }
 
     public static function findByObfuscatedId(string $obfuscatedId): ?self
     {
-        $prefix = (new static)->getObfuscationPrefix();
+        $prefix = (new static())->getObfuscationPrefix();
 
-        if (!str_starts_with($obfuscatedId, $prefix)) {
+        if (! str_starts_with($obfuscatedId, $prefix)) {
             return null;
         }
 
         $encoded = substr($obfuscatedId, strlen($prefix));
-        $id = (new static)->decodeId($encoded);
+        $id = (new static())->decodeId($encoded);
 
         return static::find($id);
     }
 
-      protected function encodeId(int $id): string
+    protected function encodeId(int $id): string
     {
         $salt = config('services.obfuscation_salt', 93421);
         $mixed = $id ^ $salt;
+
         return strtoupper(base_convert($mixed, 10, 36));
     }
 
@@ -34,9 +35,9 @@ trait Obfuscatable
     {
         $salt = config('services.obfuscation_salt', 93421);
         $mixed = base_convert($encoded, 36, 10);
+
         return $mixed ^ $salt;
     }
 
     abstract protected function getObfuscationPrefix(): string;
-
 }
