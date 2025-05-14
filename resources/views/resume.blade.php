@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Sunhour Heng - Resume</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/filament/filament/app.css') }}" rel="stylesheet"> {{-- Tailwind CSS --}}
+      <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print {
             @page { size: A4; margin: 20mm; }
