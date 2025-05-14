@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Sunhour Heng - Resume</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> {{-- Tailwind CSS --}}
+    <link href="{{ asset('css/filament/filament/app.css') }}" rel="stylesheet"> {{-- Tailwind CSS --}}
     <style>
         @media print {
             @page { size: A4; margin: 20mm; }
@@ -17,14 +17,14 @@
             <h1 class="text-3xl font-bold">Sunhour Heng</h1>
             <h2 class="text-xl text-gray-600">Full-stack Developer</h2>
             <div class="mt-2 text-sm">
-                <p>Phnom Penh, Cambodia</p>
-                <p>📞 +855 12 358 051 | ✉️ sunhour012@gmail.com</p>
+                <p>{{$seeker->address}}</p>
+                <p>📞 {{$seeker->phone}} | ✉️ {{ $seeker->address }}</p>
             </div>
         </header>
 
         <section class="mb-6">
             <h3 class="text-lg font-semibold border-b border-gray-200 mb-2">Profile</h3>
-            <p>Hello I'm Sunhour, a well-qualified Full Stack Developer familiar with a wide range of programming utilities and languages. Knowledgeable of backend and frontend development requirements. Handles any part of the process with ease. Collaborative team player with excellent technical abilities offering 2+ years of related experience.</p>
+            <p>{{$jobSeeker->description}}</p>
         </section>
 
         <section class="mb-6">

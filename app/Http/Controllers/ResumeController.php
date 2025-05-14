@@ -20,6 +20,8 @@ class ResumeController extends Controller
 
         return view('resume', [
             'seeker' => $seeker,
+            'workHistory' => $seeker->workHistory,
+            'jobSeeker' => $seeker->jobSeeker,
         ]);
     }
 }
